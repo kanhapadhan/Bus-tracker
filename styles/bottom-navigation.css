@@ -1,0 +1,70 @@
+.bottom-navigation-wrapper {
+  background: #EDE8FF;
+  backdrop-filter: blur(15px);
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+ /* border-top: 1px solid var(--C7);
+  box-shadow: 0 0px 25px hsla(0, 0%, 0%, 0.4) ;*/
+  user-select: none;
+  transition: background 300ms;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.nav-item label {
+  position: absolute;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: var(--text-1);
+  transition: all .4s ease;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .4s;
+}
+.nav-item .material-symbols-rounded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*padding: 5px 15px;*/
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  font-size: 30px;
+  color: var(--C15);
+  transform: translateY(0px);
+  transition: all 300ms ease;
+}
+.nav-item:hover .material-symbols-rounded {
+  background: hsla(0, 0%, 100%, 0.4);
+  width: 60px;
+  
+}
+.nav-item.active .material-symbols-rounded {
+  background: #BDAFEB;
+  width: 60px;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  transform: translateY(-10px);
+  font-size: 25px;
+    
+}
+.nav-item.active label {
+  color: var(--C25);
+  opacity: 0.8;
+  transform: translateY(20px);
+}
