@@ -1,0 +1,75 @@
+/* Light mode styles */
+body {
+  background: #ffffff; 
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background: #2C2C2E;
+  color: #ffffff;
+}
+
+/* Radio toolbar styles */
+.radio-toolbar {
+  --toolbar-bg: #EEEEEE;
+  --toolbar-active-bg: #2169ED;
+  --toolbar-active-txt: #fff;
+  --toolbar-hover-bg: #444; 
+  --toolbar-disabled-bg: transparent; 
+  --toolbar-disabled-txt: #888; 
+  
+  background: var(--toolbar-bg);
+  width: 90%;
+  border-radius: 14px;
+  padding: 5px;
+  margin: 15px;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.dark-mode .radio-toolbar {
+  --toolbar-bg: #1F1F1F;
+  --toolbar-active-bg: #FFCF17;
+  --toolbar-active-txt: #000;
+  --toolbar-hover-bg: #444; 
+  --toolbar-disabled-bg: transparent; 
+  --toolbar-disabled-txt: #888;   
+}
+
+.radio-toolbar label {
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0.5px;
+  border-radius: 9px;
+  transition: all 0.1s ease;
+}
+
+/* Checked radio button styles */
+.radio-toolbar input[type="radio"]:checked + label {
+  background-color: var(--toolbar-active-bg);
+  color: var(--toolbar-active-txt);
+}
+
+/* Disabled radio button styles */
+.radio-toolbar input[type="radio"]:disabled + label {
+  background-color: var(--toolbar-disabled-bg);
+  color: var(--toolbar-disabled-txt);
+}
+
+/* Hover effect for labels */
+.radio-toolbar input[type="radio"] + label:hover {
+  transform: scale(1.02);
+}
+
+/* Hiding radio inputs */
+.radio-toolbar input[type="radio"] {
+  display: none;
+}
