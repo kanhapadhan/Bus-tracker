@@ -10,8 +10,10 @@
 
 <body>
   <div id="tab1" class="content active">
-    <div class="container">
-      <h1>Bus Time Tracker</h1>
+    <header id="main-header">
+      <h2>Bus Time Tracker</h2>
+    </header>
+    <main>
       <div class="current-time">
         <span>Current Time:</span>
         <span id="current-time"></span>
@@ -20,8 +22,8 @@
       <div class="next-buses">
         <header class="next-bus-header">
           <div class="main-header">Next Bus</div>
-          <div class="route forward">RNP-JSG</div>
-          <div class="route reverse">RNP-KLB</div>
+          <div class="route forward"><b>RNP</b> ••• JSG •••</div>
+          <div class="route reverse"><b>RNP</b> ••• KLB •••</div>
         </header>
         <div class="next-bus-cards">
           <section class="forward-path">
@@ -38,42 +40,47 @@
           </section>
         </div>
       </div>
-    </div>
+      
+    </main>
   </div>
   <div id="tab2" class="content">
-    <div class="bus-schedule">
+    <header id="tab2-main-header">
       <h2>Bus Schedule</h2>
-      <div class="radio-toolbar">
-        <input type="radio" name="path" id="forward-path" value="forward" checked>
-        <label for="forward-path">RNP - JSG</label>
-        <input type="radio" name="path" id="reverse-path" value="reverse">
-        <label for="reverse-path">RNP - KLB</label>
+    </header>
+    <main>
+      <div class="bus-schedule">
+        <div class="radio-toolbar">
+          <input type="radio" name="path" id="forward-path" value="forward" checked>
+          <label for="forward-path">RNP - JSG</label>
+          <input type="radio" name="path" id="reverse-path" value="reverse">
+          <label for="reverse-path">RNP - KLB</label>
+        </div>
+
+
+        <!-- <h2>(Raghunathpali — Jharsuguda)</h2> -->
+        <table id="forward-schedule" class="schedule">
+          <caption>Raghunathpali — Jharsuguda</caption>
+          <thead>
+            <tr>
+              <th>Bus Name</th>
+              <th>Expected Arrival Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <!-- <h2>Bus Schedule (Reverse Path):</h2> -->
+        <table id="reverse-schedule" class="schedule">
+          <caption>Raghunathpali — Kolabira</caption>
+          <thead>
+            <tr>
+              <th>Bus Name</th>
+              <th>Expected Arrival Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
-
-
-      <!-- <h2>(Raghunathpali — Jharsuguda)</h2> -->
-      <table id="forward-schedule" class="schedule">
-        <caption>Raghunathpali — Jharsuguda</caption>
-        <thead>
-          <tr>
-            <th>Bus Name</th>
-            <th>Expected Arrival Time</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <!-- <h2>Bus Schedule (Reverse Path):</h2> -->
-      <table id="reverse-schedule" class="schedule">
-        <caption>Raghunathpali — Kolabira</caption>
-        <thead>
-          <tr>
-            <th>Bus Name</th>
-            <th>Expected Arrival Time</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+    </main>
   </div>
 
   <div class="bottom-navigation-wrapper">
