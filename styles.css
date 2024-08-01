@@ -1,5 +1,7 @@
 @import url("/styles/bottom-navigation.css");
 @import url("/styles/material-symbols.css");
+@import url("/styles/radio-toolbar.css");
+
 @font-face {
   font-family: 'ProductSans';
   src: url(/assets/ProductSans.ttf);
@@ -9,6 +11,7 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   font-family: "ProductSans";
   letter-spacing: 1.1px;
@@ -18,18 +21,24 @@ body {
   margin-bottom: 100px;
 }
 
-
-.container {
-  padding: 20px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
+#tab1 #main-header {
+  padding: 0 20px;
+  background: #eee;
 }
 
-h1,
-h2 {
-  color: #333;
+#tab1,
+#tab2 {
+  flex-direction: column;
+}
+
+:is(#tab1, #tab2) main {
+  padding: 15px;
+}
+
+#tab2-main-header {
+  padding: 0 20px;
+  background: #eee;
+  margin: 0;
 }
 
 .current-time,
@@ -73,11 +82,7 @@ tbody tr:nth-child(even) {
 table caption {
   font-size: 1.3em;
   font-weight: bold;
-}
-
-.next-forward-bus-name,
-.next-reverse-bus-name {
-  color: rebeccapurple;
+  margin-bottom: 10px;
 }
 
 table tr.active {
@@ -89,27 +94,33 @@ table tr.active {
 table tr :is(td, th):last-child {
   text-align: center;
 }
-
+small {
+  font-size: 0.7em;
+  color: #999;
+}
 
 .next-buses {
   outline: 1px solid #ddd;
   padding: 5px;
   border-radius: 20px;
 }
+
 .next-bus-header {
   display: flex;
   flex-wrap: wrap;
   gap: 5px 0;
   margin-bottom: 10px;
 }
+
 .next-bus-header .main-header {
   width: 100%;
-  background: #eee;
+  background: #DCDCFF;
   border-radius: 15px;
   padding: 7px;
   text-align: center;
   font-size: 1.3em;
 }
+
 .next-bus-header .route {
   width: calc(50% - 5px);
   background: #eee;
@@ -117,8 +128,15 @@ table tr :is(td, th):last-child {
   padding: 10px;
   text-align: center;
 }
+
 .route.forward {
   margin-right: 10px;
+}
+
+.route:is(.reverse,.forward) {
+  padding-left: 60px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .next-bus-cards {
@@ -127,14 +145,28 @@ table tr :is(td, th):last-child {
   justify-content: space-between;
   gap: 10px;
 }
-.forward-path, .reverse-path {
+
+.forward-path,
+.reverse-path {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
 }
+
+.forward-path::after {
+  content: "";
+  height: calc(100% + 60px);
+  width: 1px;
+  background: #ddd;
+  position: absolute;
+  right: -5px;
+  top: -55px;
+}
+
 .next-bus-card {
-  background: #EFFFE4;
+  background: #E4D4FF;
   border-radius: 15px;
   padding: 10px;
   display: flex;
@@ -145,12 +177,15 @@ table tr :is(td, th):last-child {
 
 .bus-name {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  white-space: nowrap;
+  color: rebeccapurple;
 }
 
-.route {
-  
+.next-bus-card small {
+  color: #9B7ECF;
 }
+.route {}
 
 .no-bus-msg {
   background: #FFD0D0;
@@ -158,100 +193,28 @@ table tr :is(td, th):last-child {
   padding: 10px;
   flex: 1;
 }
-/* Light mode styles */
-body {
-  background: #ffffff; 
-}
-
-/* Dark mode styles */
-body.dark-mode {
-  background: #2C2C2E;
-  color: #ffffff;
-}
-
-/* Radio toolbar styles */
-.radio-toolbar {
-  --toolbar-bg: #EEEEEE;
-  --toolbar-active-bg: #2169ED;
-  --toolbar-active-txt: #fff;
-  --toolbar-hover-bg: #444; 
-  --toolbar-disabled-bg: transparent; 
-  --toolbar-disabled-txt: #888; 
-  
-  background: var(--toolbar-bg);
-  width: 90%;
-  border-radius: 14px;
-  padding: 5px;
-  margin: 15px;
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  gap: 5px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-body.dark-mode .radio-toolbar {
-  --toolbar-bg: #1F1F1F;
-  --toolbar-active-bg: #FFCF17;
-  --toolbar-active-txt: #000;
-  --toolbar-hover-bg: #444; 
-  --toolbar-disabled-bg: transparent; 
-  --toolbar-disabled-txt: #888;   
-}
-
-.radio-toolbar label {
-  flex: 1;
-  text-align: center;
-  padding: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  margin: 0.5px;
-  border-radius: 9px;
-  transition: all 0.1s ease;
-}
-
-/* Checked radio button styles */
-.radio-toolbar input[type="radio"]:checked + label {
-  background-color: var(--toolbar-active-bg);
-  color: var(--toolbar-active-txt);
-}
-
-/* Disabled radio button styles */
-.radio-toolbar input[type="radio"]:disabled + label {
-  background-color: var(--toolbar-disabled-bg);
-  color: var(--toolbar-disabled-txt);
-}
-
-/* Hover effect for labels */
-.radio-toolbar input[type="radio"] + label:hover {
-  transform: scale(1.02);
-}
-
-/* Hiding radio inputs */
-.radio-toolbar input[type="radio"] {
-  display: none;
-}
 
 
 .schedule {
   display: none;
 }
+
 #forward-schedule {
   display: block;
 }
+
 .content {
   display: none;
   animation: content .3s ease;
 
 }
+
 #tab2 {
   display: none;
   justify-content: center;
 }
 
-:is(#tab1,#tab2).active {
+:is(#tab1, #tab2).active {
   display: flex;
 }
 
@@ -260,6 +223,7 @@ body.dark-mode .radio-toolbar {
     opacity: 0;
     transform: translateY(10%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0%);
