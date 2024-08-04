@@ -26,6 +26,7 @@ const reverseSchedule = [
   { name: "BHANUMATI", time: "08:55 - 10:10" },
   { name: "TARA", time: "10:20 - 10:35" },
   { name: "PRINCE", time: "11:15 - 11:30" },
+  //{ name: "SAMALESWARI", time: "11:15" },
   { name: "PANI PANI", time: "11:50 - 12:10" },
   { name: "BHAGYALAXMI", time: "12:50 - 13:05" },
   { name: "M/S NAYAK", time: "13:20 - 13:35" },
@@ -91,48 +92,46 @@ function parseTime(timeStr) {
 }
 
 
+let currentForwardBuses = [];
+let currentReverseBuses = [];
+
+function areBusesEqual(buses1, buses2) {
+  if (buses1.length !== buses2.length) return false;
+  return buses1.every((bus, i) => bus.name === buses2[i].name && bus.time === buses2[i].time);
+}
+
+function createBusCard(bus) {
+  const card = document.createElement("div");
+  card.className = 'next-bus-card active';
+  card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="time">${bus.time}</span>`;
+  return card;
+}
+
+function updateBusCards(container, nextBuses, currentBuses) {
+  if (!areBusesEqual(nextBuses, currentBuses)) {
+    container.innerHTML = '';
+    if (nextBuses.length) {
+      nextBuses.forEach(bus => container.appendChild(createBusCard(bus)));
+    } else {
+      const noBusMsg = document.createElement("div");
+      noBusMsg.className = 'no-bus-msg';
+      noBusMsg.innerHTML = `No buses arriving now.`;
+      container.appendChild(noBusMsg);
+    }
+  }
+}
 
 function updateNextBus() {
   const nextForwardBuses = findNextBus(forwardSchedule);
   const nextReverseBuses = findNextBus(reverseSchedule);
-  //console.log(nextForwardBuses, nextReverseBuses)
-  
-  let nextForwardBusCards = document.querySelector(".forward-path");
-  let nextReverseBusCards = document.querySelector(".reverse-path");
+  const nextForwardBusCards = document.querySelector(".forward-path");
+  const nextReverseBusCards = document.querySelector(".reverse-path");
 
-  // Clear existing cards
-  nextForwardBusCards.innerHTML = '';
-  nextReverseBusCards.innerHTML = '';
+  updateBusCards(nextForwardBusCards, nextForwardBuses, currentForwardBuses);
+  currentForwardBuses = nextForwardBuses;
 
-  // Update forward buses
-  if (nextForwardBuses.length) {
-    nextForwardBuses.forEach(bus => {
-      const card = document.createElement("div");
-      card.className = 'next-bus-card';
-      card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="time">${bus.time}</span>`;
-      nextForwardBusCards.appendChild(card);
-    });
-  } else {
-    const noBusMsg = document.createElement("div");
-    noBusMsg.className = 'no-bus-msg';
-    noBusMsg.innerHTML = `No forward buses arriving now.`;
-    nextForwardBusCards.appendChild(noBusMsg);
-  }
-
-  // Update reverse buses
-  if (nextReverseBuses.length) {
-    nextReverseBuses.forEach(bus => {
-      const card = document.createElement("div");
-      card.className = 'next-bus-card';
-      card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="time">${bus.time}</span>`;
-      nextReverseBusCards.appendChild(card);
-    });
-  } else {
-    const noBusMsg = document.createElement("div");
-    noBusMsg.className = 'no-bus-msg';
-    noBusMsg.innerHTML = `No reverse buses arriving now.`;
-    nextReverseBusCards.appendChild(noBusMsg);
-  }
+  updateBusCards(nextReverseBusCards, nextReverseBuses, currentReverseBuses);
+  currentReverseBuses = nextReverseBuses;
 }
 
 
@@ -143,22 +142,17 @@ function displaySchedule() {
   forwardSchedule.forEach((bus,i) => {
     const row = document.createElement("tr");
     
-    /* TODO: try different method, outside this function 
-    if (bus.time == findNextBus(forwardSchedule).time) {
-      row.classList.add('active')
-    } */
+
     row.id = 'forward-bus-'+i
-    row.innerHTML = `<td>${bus.name}</td><td>${bus.time}</td>`;
+    row.innerHTML = `<td>${bus.name}</td><td>${convertTime24to12(bus.time)}</td>`;
     forwardScheduleElement.appendChild(row);
   });
 
   reverseSchedule.forEach((bus,i) => {
     const row = document.createElement("tr");
-    if (bus.time == findNextBus(reverseSchedule).time) {
-      row.classList.add('active')
-    }
+
     row.id = 'reverse-bus-'+i
-    row.innerHTML = `<td>${bus.name}</td><td>${bus.time}</td>`;
+    row.innerHTML = `<td>${bus.name}</td><td>${convertTime24to12(bus.time)}</td>`;
     reverseScheduleElement.appendChild(row);
   });
   
@@ -226,4 +220,26 @@ function openTab(evt, tabName) {
 
   document.getElementById(tabName).classList.add('active');
   evt.currentTarget.classList.add('active');
+}
+
+function convertTime24to12(timeStr) {
+    const convertSingleTime = (time) => {
+        let [hours, minutes] = time.split(':').map(Number);
+        let period = '<small>AM</small>';
+
+        if (hours >= 12) {
+            period = '<small>PM</small>';
+            if (hours > 12) hours -= 12;
+        } else if (hours === 0) {
+            hours = 12;
+        }
+
+        return `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
+    };
+
+    const [startTime, endTime] = timeStr.split(' - ');
+    const startTime12 = convertSingleTime(startTime);
+    const endTime12 = convertSingleTime(endTime);
+
+    return `${startTime12} - ${endTime12}`;
 }
