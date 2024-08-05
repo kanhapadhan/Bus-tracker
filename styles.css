@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'ProductSans';
-  src: url(/assets/ProductSans.ttf);
+  src: url("/assets/ProductSans.ttf");
   font-display: swap;
 }
 
