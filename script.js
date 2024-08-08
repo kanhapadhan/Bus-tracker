@@ -26,7 +26,7 @@ const reverseSchedule = [
   { name: "BHANUMATI", time: "08:55 - 10:10" },
   { name: "TARA", time: "10:20 - 10:35" },
   { name: "PRINCE", time: "11:15 - 11:30" },
-  //{ name: "SAMALESWARI", time: "11:15" },
+  { name: "SAMALESWARI", time: "11:45 - 12:00" },
   { name: "PANI PANI", time: "11:50 - 12:10" },
   { name: "BHAGYALAXMI", time: "12:50 - 13:05" },
   { name: "M/S NAYAK", time: "13:20 - 13:35" },
@@ -242,4 +242,4 @@ function convertTime24to12(timeStr) {
     const endTime12 = convertSingleTime(endTime);
 
     return `${startTime12} - ${endTime12}`;
-}
+    }
