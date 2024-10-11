@@ -114,9 +114,9 @@ function updateBusCards(container, nextBuses, currentBuses) {
     //console.log('buses equal')
     if (nextBuses.length) {
       nextBuses.forEach(bus => container.appendChild(createBusCard(bus)));
-      console.log('there are upcoming buses.')
+      //console.log('there are upcoming buses.')
     } else {
-      console.log('No Buses arriving now!')
+      //console.log('No Buses arriving now!')
       const noBusMsg = document.createElement("div");
       noBusMsg.className = 'no-bus-msg';
       noBusMsg.innerHTML = `No buses arriving now.`;
