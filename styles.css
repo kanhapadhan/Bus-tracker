@@ -55,36 +55,46 @@ body {
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 5px;
   margin-bottom: 20px;
+  margin: auto;
 }
 
 thead {
   background-color: #f0f0f0;
 }
 
-th,
-td {
-  border: 1px solid #ddd;
+th,td {
+  border: 0px solid #ddd;
   padding: 8px;
   text-align: left;
   font-size: 1.1em;
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: #E7E7E7;
+}
+td {
+  white-space: nowrap;
+}
+tr > :is(th,td):first-child {
+  border-radius: 15px 0 0 15px;
+  padding-left: 25px;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+tr > :is(th,td):last-child {
+  border-radius: 0 15px 15px 0;
+}
+
+tbody tr {
+  background-color: #F5F5F5;
 }
 
 table caption {
   font-size: 1.3em;
   font-weight: bold;
-  margin-bottom: 10px;
 }
-
 table tr.active {
   color: forestgreen;
   font-weight: bold;
