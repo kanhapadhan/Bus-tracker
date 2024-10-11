@@ -103,7 +103,7 @@ function areBusesEqual(buses1, buses2) {
 function createBusCard(bus) {
   const card = document.createElement("div");
   card.className = 'next-bus-card active';
-  card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="time">${bus.time}</span>`;
+  card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="time">${convertTime24to12(bus.time)}</span>`;
   return card;
 }
 
@@ -242,4 +242,5 @@ function convertTime24to12(timeStr) {
     const endTime12 = convertSingleTime(endTime);
 
     return `${startTime12} - ${endTime12}`;
-    }
+        }
+                           
