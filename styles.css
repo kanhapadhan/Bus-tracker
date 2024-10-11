@@ -1,7 +1,7 @@
-/*@import url("/styles/bottom-navigation.css");
-@import url("/styles/radio-toolbar.css");
+@import url("/styles/bottom-navigation.css");
 @import url("/styles/material-symbols.css");
-*/
+@import url("/styles/radio-toolbar.css");
+
 @font-face {
   font-family: 'ProductSans';
   src: url("/assets/ProductSans.ttf");
@@ -73,7 +73,7 @@ th,td {
 }
 
 th {
-  background-color: #E7E7E7;
+  background-color: hsla(259, 45%, 92%, 1);
 }
 td {
   white-space: nowrap;
@@ -95,6 +95,7 @@ table caption {
   font-size: 1.3em;
   font-weight: bold;
 }
+
 table tr.active {
   color: forestgreen;
   font-weight: bold;
@@ -105,7 +106,7 @@ table tr :is(td, th):last-child {
   text-align: center;
 }
 small {
-  font-size: 0.7em;
+  font-size: 0.8em;
   color: #999;
 }
 
@@ -144,7 +145,6 @@ small {
 }
 
 .route:is(.reverse,.forward) {
-  padding-left: 60px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -193,7 +193,7 @@ small {
 }
 
 .next-bus-card small {
-  color: #9B7ECF;
+  color: hsla(261, 37%, 50%, 1);
 }
 .route {}
 
