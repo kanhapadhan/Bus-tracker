@@ -54,7 +54,7 @@ function updateTime() {
 
 
 function findNextBus(timeArray,currentTimeStr) {
-  const currentTime = new Date().getTime() //new Date('18 July 2024 15:00:00').getTime() //parseTime(currentTimeStr);
+  const currentTime = new Date().getTime() //new Date('11 Oct 2024 17:00:00').getTime() //parseTime(currentTimeStr);
   const result = [];
 
   for (let i = 0; i < timeArray.length; i++) {
@@ -96,6 +96,7 @@ let currentForwardBuses = [];
 let currentReverseBuses = [];
 
 function areBusesEqual(buses1, buses2) {
+  if (buses1.length === 0 && buses2.length === 0) return false;
   if (buses1.length !== buses2.length) return false;
   return buses1.every((bus, i) => bus.name === buses2[i].name && bus.time === buses2[i].time);
 }
@@ -103,16 +104,19 @@ function areBusesEqual(buses1, buses2) {
 function createBusCard(bus) {
   const card = document.createElement("div");
   card.className = 'next-bus-card active';
-  card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="time">${convertTime24to12(bus.time)}</span>`;
+  card.innerHTML = `<span class="bus-name">${bus.name}</span><span class="bus-time">${convertTime24to12(bus.time)}</span>`;
   return card;
 }
 
 function updateBusCards(container, nextBuses, currentBuses) {
   if (!areBusesEqual(nextBuses, currentBuses)) {
     container.innerHTML = '';
+    //console.log('buses equal')
     if (nextBuses.length) {
       nextBuses.forEach(bus => container.appendChild(createBusCard(bus)));
+      console.log('there are upcoming buses.')
     } else {
+      console.log('No Buses arriving now!')
       const noBusMsg = document.createElement("div");
       noBusMsg.className = 'no-bus-msg';
       noBusMsg.innerHTML = `No buses arriving now.`;
@@ -242,5 +246,5 @@ function convertTime24to12(timeStr) {
     const endTime12 = convertSingleTime(endTime);
 
     return `${startTime12} - ${endTime12}`;
-        }
-                           
+      }
+                          
