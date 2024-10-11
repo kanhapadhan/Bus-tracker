@@ -192,6 +192,11 @@ small {
   color: rebeccapurple;
 }
 
+.bus-time {
+  white-space: nowrap;
+  letter-spacing: .3px;
+}
+
 .next-bus-card small {
   color: hsla(261, 37%, 50%, 1);
 }
